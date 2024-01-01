@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>variables</title>
+    </head>
+    <body>
+        <p>Cart Quantity</p>
+        <button onclick="
+            console.log(`Quantity is ${cartQuantity}`);
+        ">Show Quantity</button>
+        <button>Add to Cart</button>
+        <button onclick="
+            cartQuantity += 2;
+        ">+2</button>
+        <button onclick="
+            cartQuantity += 3;
+        ">+3</button>
+        <button onClick="
+            cartQuantity = 0;
+        ">Reset Cart</button>
+        <script>
+            let cartQuantity = 10;
+            console.log(typeof(cartQuantity));
+        </script>
+    </body>
+</html>

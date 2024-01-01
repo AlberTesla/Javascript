@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Dom Project Final</title>
+        <style>
+            body{
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 12px;
+            }
+            .sub-button {
+                background-color: black;
+                border: none;
+                border-radius: 30px;
+                color : white;
+                padding : 5px;
+                margin-bottom: 40px;
+            }
+            .sub-button-clicked{
+                background-color: rgb(146, 140, 140);
+                color: black;
+            }
+            .calculate {
+                background-color: green;
+                color : white;
+                padding: 12px 12px;
+                border: none;
+            }
+            .input {
+                padding : 10px;
+            }
+            .result {
+                margin-bottom: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <p class="text">Youtube Subscribe button</p>
+        <button onclick="updateButtonText();" class="sub-button">Subscribe</button>
+        <p>Amazon Shipping Calculator</p>
+        <p>Order under $40  = +$10 Shipping</p>
+        <p>Order over $40  = Free Shipping</p>
+        <input placeholder="Cost of Order" class="input" type="text" onkeydown="handleEnterKeyEvent(event);">
+        <button class="calculate" onclick="calculateShipping();" >Calculate</button>
+        <p class="result"></p>
+        <p class="rockpaper">Rock Paper Scissors</p>
+        <a class="click-here" target="_blank" href="http://127.0.0.1:5500/rockpaperscissors-final.html">Click Here</a>
+        <script>
+            function handleEnterKeyEvent(event){
+                if (event.key === 'Enter'){
+                    calculateShipping();
+                }
+            }
+            function calculateShipping(){
+                const input = document.querySelector(".input");
+                const result = document.querySelector(".result");
+                let value = Number(input.value);
+                console.log(value);
+                if (value <= 40){
+                    value += 10;
+                }
+                result.innerHTML = `$${String(value)}`;
+            }
+            function updateButtonText(){
+                let button = document.querySelector(".sub-button")
+                if (button){
+                    if (button.textContent === 'Subscribe'){
+                        button.innerHTML = "Subscribed";
+                        button.classList.add('sub-button-clicked');
+                    }
+                    else{
+                        button.innerHTML = "Subscribe";
+                        button.setAttribute('style', 'color : white, background-color : black');
+                        button.classList.remove('sub-button-clicked');
+                    }
+                }
+            }
+        </script>
+    </body>
+</html>

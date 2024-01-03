@@ -2,15 +2,37 @@
 <html>
     <head>
         <title>Arrays and Loops</title>
+        <style>
+            .to-do-list {
+                display: grid;
+                grid-template-columns: 150px 150px 200px;
+                vertical-align: middle;
+            }
+            .div-button{
+                position: relative;
+                display: flex;
+                align-items: center;
+            }
+            .delete-button{
+                position: absolute;
+            }
+        </style>
     </head>
     <body>
         <p>Todo List</p>
         <input class="input-box" placeholder="Todo name" type="text">
         <input class="input-date" type="date">
-        <button class="add-button" onclick="addListValue();">Add</button>
+        <button class="add-button">Add</button>
         <div class="to-do-list"></div>
         <script>
             let todoArray = [];
+
+            console.log("hello");
+
+            const addButton = document.querySelector('.add-button');
+            addButton.addEventListener('click', function(){
+                addListValue();
+            });
 
             function renderValueList(){
                 const divElement = document.querySelector('.to-do-list');
@@ -19,9 +41,30 @@
                     for (let i = 0; i < todoArray.length; i++){
                         const name = todoArray[i].name;
                         const date = todoArray[i].date;
-                        htmlString += `<p>${name} ${date}<button onclick="todoArray.splice(${i}, 1);renderValueList();">Delete</button></p>`;
+                        htmlString += `
+                        <div>
+                            <p>${name}</p>
+                        </div>
+                        <div>
+                            <p>${date}</p>
+                        </div>
+                        <div class="div-button">
+                            <button class="delete-button">Delete</button>
+                        </div>
+                        `;
                     }
                     divElement.innerHTML = htmlString;
+                }
+                //returns arrays of buttons
+                let button = document.querySelectorAll('.delete-button');
+                if (button.length){
+                    button.forEach(function(value, index){
+                    value.addEventListener('click', function(){
+                        todoArray.splice(index, 1);
+                        renderValueList();
+                    });
+                });
+                console.log(button);
                 }
             }
 
@@ -29,7 +72,7 @@
                 let inputBox = document.querySelector('.input-box');
                 let date = document.querySelector('.input-date');
                 if (inputBox && date){
-                    if (inputBox.value !== '' || date.value !== ''){
+                    if (inputBox.value !== '' && date.value !== ''){
                         const obj = {name : inputBox.value, date : date.value};
                         todoArray.push(obj);
                         inputBox.value = '';
